@@ -36,15 +36,19 @@ public class DriveTrain extends SubsystemBase
   {
     leftDriveTalon = new WPI_TalonSRX(Constants.DriveTrainPorts.LeftDriveTalonPort);
     rightDriveTalon = new WPI_TalonSRX(Constants.DriveTrainPorts.RightDriveTalonPort);
+    //assigns talon information to variables
   
     leftDriveTalon.setNeutralMode(NeutralMode.Coast);
     rightDriveTalon.setNeutralMode(NeutralMode.Coast);
+    //sets motors to neutral
 
     leftDriveTalon.setInverted(true);
     rightDriveTalon.setInverted(false);
+    //sets motors to move opposite of each other
 
     leftDriveTalon.setSensorPhase(true);
     rightDriveTalon.setSensorPhase(true);
+    //turns sensing on
 
     leftDriveTalon.configFactoryDefault();
     leftDriveTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
@@ -56,18 +60,22 @@ public class DriveTrain extends SubsystemBase
   public void tankDrive(double leftSpeed, double rightSpeed) {
     rightDriveTalon.set(rightSpeed);
     leftDriveTalon.set(leftSpeed);
+    //sets speed for talons
   }
 
   public void resetEncoders() {
+    //resets encoders to starting position
     leftDriveTalon.setSelectedSensorPosition(0,0,10);
     rightDriveTalon.setSelectedSensorPosition(0,0,10);
   }
 
   public double getTicks() {
+    //gets values at times from sensors
     return (leftDriveTalon.getSelectedSensorPosition(0) + rightDriveTalon.getSelectedSensorPosition(0)) / 2.0;
   }
  
   public double getAngle(){
+    //get angle from sensor
     return navx.getAngle(); 
   }
  
@@ -77,10 +85,11 @@ public class DriveTrain extends SubsystemBase
 
   @Override
   public void periodic() {
+    //sends information to smart daashboard
     SmartDashboard.putNumber("Left Voltage", leftDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("Right Voltage", rightDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("Angle", navx.getAngle());
-
+    //sets data in smart dashboard
     LeftVoltage.setDouble(leftDriveTalon.getMotorOutputPercent());
     RightVoltage.setDouble(rightDriveTalon.getMotorOutputPercent());
 
