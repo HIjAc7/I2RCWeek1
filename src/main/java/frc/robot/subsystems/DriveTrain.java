@@ -89,6 +89,9 @@ public class DriveTrain extends SubsystemBase
     SmartDashboard.putNumber("Left Voltage", leftDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("Right Voltage", rightDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("Angle", navx.getAngle());
+    SmartDashboard.putNumber("Left Ticks", leftDriveTalon.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Right Ticks", rightDriveTalon.getSelectedSensorPosition(0));
+    
     //sets data in smart dashboard
     LeftVoltage.setDouble(leftDriveTalon.getMotorOutputPercent());
     RightVoltage.setDouble(rightDriveTalon.getMotorOutputPercent());
